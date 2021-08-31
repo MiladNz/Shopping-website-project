@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 
 :root {
-  --primaryColor: #6d28d9;
-  --secondaryColor: #ede9fe;
+  --primaryColor: #e07a26;
+  --secondaryColor: #fef4e9;
   --mainWhite: #fff;
   --mainBlack: #222;
   --mainGrey: #7c7c7c;
   --mainSpacing: 0.1rem;
   --mainTransition: all 0.3s linear;
-  --mainRed: #db2777;
+  --mainRed: #c21f68;
   --bodyColor: #f6f6f6;
 }
 
