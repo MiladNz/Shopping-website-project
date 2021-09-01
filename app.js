@@ -40,7 +40,9 @@ class UI{
 //3.storage
 
 class Storage{
-  
+  static saveProducts(products){
+    localStorage.setItem("products",JSON.stringify(products));
+  }
 }
 
 
@@ -49,6 +51,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   const productsData = products.getProduct();
   const ui = new UI();
   ui.displayProducts(productsData);
+  Storage.saveProducts(productsData);
   // console.log(productsData);
 })
 
