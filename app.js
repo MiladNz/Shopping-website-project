@@ -79,7 +79,6 @@ class UI{
     },0);
     cartTotal.innerText =  `total price : ${totalPrice.toFixed(2)} $`;
     cartItems.innerText = tempCartItems;
-    console.log(tempCartItems);
   }
 }
 //3.storage
