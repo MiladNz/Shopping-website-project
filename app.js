@@ -6,6 +6,8 @@ const backDrop = document.querySelector(".backdrop");
 const closeModal = document.querySelector(".cart-item-confirm");
 
 const productsDOM = document.querySelector(".products-center");
+const cartTotal = document.querySelector(".cart-total");
+const cartItems = document.querySelector(".cart-items");
 
 let cart = [];
 //1.get products from producs.js
@@ -56,14 +58,28 @@ class UI{
       //get product from products:
       const addedProduct = Storage.getProduct(id);
       //add to cart
-      console.log(addedProduct);
       cart = [...cart ,{ ...addedProduct , quantity: 1}];
       //save cart to local storage
       Storage.saveCart(cart);
       //update cart value
+      this.setCartValue(cart);
       //add to cart item
+
+      //get cart value from local storage
       });
     });
+  }
+  setCartValue(cart){
+    //1. cart items
+    //2. cart total price
+    let tempCartItems = 0;
+    const totalPrice = cart.reduce((acc,curr) => {
+      tempCartItems += curr.quantity;
+      return acc + curr.quantity + curr.price;
+    },0);
+    cartTotal.innerText =  `total price : ${totalPrice.toFixed(2)} $`;
+    cartItems.innerText = tempCartItems;
+    console.log(tempCartItems);
   }
 }
 //3.storage
@@ -89,15 +105,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   ui.displayProducts(productsData);
   ui.getAddToCartBtns();
   Storage.saveProducts(productsData);
-  // console.log(productsData);
 })
-
-
-
-
-
-
-
 
 
 //////////////////////////////////////////
