@@ -7,7 +7,7 @@ const closeModal = document.querySelector(".cart-item-confirm");
 
 const productsDOM = document.querySelector(".products-center");
 
-const cart = [];
+let cart = [];
 //1.get products from producs.js
 
 class Products{
@@ -51,7 +51,17 @@ class UI{
       }
       
     btn.addEventListener("click", (event)=>{
-      console.log(event.target.dataset.id);
+      event.target.innerText = "In Cart";
+      event.target.disabled = true;
+      //get product from products:
+      const addedProduct = Storage.getProduct(id);
+      //add to cart
+      console.log(addedProduct);
+      cart = [...cart ,{ ...addedProduct , quantity: 1}];
+      //save cart to local storage
+      Storage.saveCart(cart);
+      //update cart value
+      //add to cart item
       });
     });
   }
@@ -60,7 +70,14 @@ class UI{
 
 class Storage{
   static saveProducts(products){
-    localStorage.setItem("products",JSON.stringify(products));
+    localStorage.setItem("products", JSON.stringify(products));
+  }
+  static getProduct(id){
+    const _products =  JSON.parse(localStorage.getItem("products"));
+    return _products.find((p) => p.id === parseInt(id));
+  }
+  static saveCart(cart){
+    localStorage.setItem("cart", JSON.stringify(cart));
   }
 }
 
