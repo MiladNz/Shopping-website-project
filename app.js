@@ -15,12 +15,15 @@ const clearCartBtn = document.querySelector(".clear-cart");
 // cart == modal of cart
 let cart = [];
 //1.get products from producs.js
+const buttonsDOM = [];
 
 class Products{
   getProduct(){
     return productsData;
   }
 }
+
+let buttsDOM = [];
 //2.display products
 class UI{
   displayProducts(products){
@@ -43,10 +46,10 @@ class UI{
     });
   }
   getAddToCartBtns(){
-    const addToCartBtns = document.querySelectorAll(".add-to-cart");
-    const buttons = [...addToCartBtns];
-    
-    buttons.forEach(btn =>{
+    const addToCartBtns = [...document.querySelectorAll(".add-to-cart")];
+    buttsDOM = addToCartBtns;
+
+    addToCartBtns.forEach((btn) =>{
       const id = btn.dataset.id;
       //check this product id is in cart or not
       const isInCart = cart.find((p) => p.id === id);
@@ -130,6 +133,14 @@ class UI{
     this.setCartValue(cart);
     //update storage :
     Storage.saveCart(cart);
+
+    //get add to cart btns => update text and disabled
+    this.getSinglebutton(id);
+  }
+  getSinglebutton(id) {
+    const button = buttsDOM.find( btn => btn.dataset.id == id);
+    button.innerText = "add to cart";
+    buttsDOM.disabled = false;
   }
 }
 //3.storage
