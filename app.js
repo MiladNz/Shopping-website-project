@@ -92,11 +92,11 @@ class UI{
       <h5>$ ${cartItem.price}</h5>
     </div>
     <div class="cart-item-conteoller">
-      <i class="fas fa-chevron-up"></i>
+      <i class="fas fa-chevron-up" data-id=${cartItem.id}></i>
       <p>${cartItem.quantity}</p>
-      <i class="fas fa-chevron-down"></i>
+      <i class="fas fa-chevron-down" data-id=${cartItem.id}></i>
     </div>
-    <i class="far fa-trash-alt"></i>
+    <i class="far fa-trash-alt" data-id=${cartItem.id}></i>
     `;
     cartContent.appendChild(div);
   }
@@ -110,12 +110,17 @@ class UI{
   }
   cartLogic(){
     //clear cart
-    clearCartBtn.addEventListener("click",() => {
-      //remove : (DRY) 
-      cart.forEach((cItem) => this.removeItem(cItem.id));
-      //remove cart content children :
-      //console.log(cartContent.children[1]);
-    });
+    clearCartBtn.addEventListener("click", () => this.clearCart());
+  }
+  clearCart(){
+     //remove : 
+     cart.forEach((cItem) => this.removeItem(cItem.id));
+     //remove cart content children :
+     //console.log(cartContent.children);
+     while(cartContent.children.length){
+       cartContent.removeChild(cartContent.children[0]);
+     }
+     closeModalFunction();
   }
 
   removeItem(id) {
