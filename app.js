@@ -5,10 +5,11 @@ const cartModal = document.querySelector(".cart");
 const backDrop = document.querySelector(".backdrop");
 const closeModal = document.querySelector(".cart-item-confirm");
 
-const productsDOM = document.querySelector(".products-center");
-const cartTotal = document.querySelector(".cart-total");
 const cartItems = document.querySelector(".cart-items");
+const cartTotal = document.querySelector(".cart-total");
 const cartContent = document.querySelector(".cart-content");
+const productsDOM = document.querySelector(".products-center");
+const clearCartBtn = document.querySelector(".clear-cart");
 
 // products == main section for present products
 // cart == modal of cart
@@ -107,6 +108,24 @@ class UI{
     //setValue : price + items
     this.setCartValue(cart);
   }
+  cartLogic(){
+    //clear cart
+    clearCartBtn.addEventListener("click",() => {
+      //remove : (DRY) 
+      cart.forEach((cItem) => this.removeItem(cItem.id));
+      //remove cart content children :
+      //console.log(cartContent.children[1]);
+    });
+  }
+
+  removeItem(id) {
+    //update cart
+    cart = cart.filter((cItem) => cItem.id !== id);
+    //total price and cart items
+    this.setCartValue(cart);
+    //update storage :
+    Storage.saveCart(cart);
+  }
 }
 //3.storage
 
@@ -136,6 +155,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   ui.displayProducts(productsData);
   ui.getAddToCartBtns();
   Storage.saveProducts(productsData);
+  ui.cartLogic();
 })
 
 
