@@ -125,7 +125,6 @@ class UI{
      }
      closeModalFunction();
   }
-
   removeItem(id) {
     //update cart
     cart = cart.filter((cItem) => cItem.id !== id);
@@ -135,9 +134,9 @@ class UI{
     Storage.saveCart(cart);
 
     //get add to cart btns => update text and disabled
-    this.getSinglebutton(id);
+    this.getSingleButton(id);
   }
-  getSinglebutton(id) {
+  getSingleButton(id) {
     const button = buttsDOM.find( btn => btn.dataset.id == id);
     button.innerText = "add to cart";
     buttsDOM.disabled = false;
