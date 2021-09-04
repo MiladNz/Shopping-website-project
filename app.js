@@ -114,6 +114,24 @@ class UI{
   cartLogic(){
     //clear cart
     clearCartBtn.addEventListener("click", () => this.clearCart());
+
+    //cart functionality (chevron-up and down)
+    cartContent.addEventListener("click" , (event)=>{
+      // console.log(event.target);
+      if(event.target.classList.contains("fa-chevron-up")){
+        //console.log(event.target.dataset.id);
+        const addQuantity = event.target;
+        //get item from cart 
+        const addedItem = cart.find(cItem =>cItem.id == addQuantity.dataset.id );
+        addedItem.quantity++;
+        //update cart value
+        this.setCartValue(cart);
+        //save cart
+        Storage.saveCart(cart);
+        //update cart item in UI(number in modal)
+        addQuantity.nextElementSibling.innerText = addedItem.quantity;
+      }
+    });
   }
   clearCart(){
      //remove : 
