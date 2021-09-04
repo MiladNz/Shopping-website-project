@@ -10,6 +10,8 @@ const cartTotal = document.querySelector(".cart-total");
 const cartItems = document.querySelector(".cart-items");
 const cartContent = document.querySelector(".cart-content");
 
+// products == main section for present products
+// cart == modal of cart
 let cart = [];
 //1.get products from producs.js
 
@@ -19,7 +21,6 @@ class Products{
   }
 }
 //2.display products
-
 class UI{
   displayProducts(products){
     let result = "";
