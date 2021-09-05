@@ -130,6 +130,16 @@ class UI{
         Storage.saveCart(cart);
         //update cart item in UI(number in modal)
         addQuantity.nextElementSibling.innerText = addedItem.quantity;
+      }else if(event.target.classList.contains("fa-trash-alt")){
+        const removeItem = event.target;
+        const _removedItem = cart.find((c)=> c.id == removeItem.dataset.id);
+        
+        this.removeItem(_removedItem.id);
+        Storage.saveCart(cart);
+        cartContent.removeChild(removeItem.parentElement);
+        //remove from cartitem
+        //call remove
+
       }
     });
   }
