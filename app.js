@@ -83,7 +83,7 @@ class UI{
       tempCartItems += curr.quantity;
       return acc + curr.quantity + curr.price;
     },0);
-    cartTotal.innerText =  `total price : ${totalPrice.toFixed(2)} $`;
+    cartTotal.innerText =  `total price : ${parseFloat(totalPrice).toFixed(2)} $`;
     cartItems.innerText = tempCartItems;
   }
   addCartItem(cartItem){
@@ -140,6 +140,20 @@ class UI{
         //remove from cartitem
         //call remove
 
+      }else if(event.target.classList.contains("fa-chevron-down")){
+        const subQuantity = event.target;
+        const substractedItem = cart.find((c)=> c.id == subQuantity.dataset.id);
+        if (substractedItem.quantity === 1){
+          this.removeItem(substractedItem.id);
+          cartContent.removeChild(subQuantity.parentElement.parentElement);
+          return;
+        }
+        substractedItem.quantity--;
+        this.setCartValue(cart);
+        //save cart
+        Storage.saveCart(cart);
+        //update cart item in UI(number in modal)
+        subQuantity.previousElementSibling.innerText = substractedItem.quantity;
       }
     });
   }
